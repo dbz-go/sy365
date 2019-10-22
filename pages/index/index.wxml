@@ -1,0 +1,111 @@
+<navbar parameter='{{parameter}}' logoUrl="{{logoUrl}}"></navbar>
+<view class='index'>
+  <!-- 顶部banner -->
+  <view class='index-bg'>
+    <swiper indicator-dots="true" autoplay="{{autoplay}}" circular="{{circular}}" interval="{{interval}}" duration="{{duration}}" indicator-color="rgba(255,255,255,0.6)" indicator-active-color="#fff">
+      <block wx:for="{{imgUrls}}" wx:key>
+        <swiper-item class='slide-navigator acea-row row-between-wrapper'>
+          <image src="{{item.pic}}" class="slide-image"/>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <!-- 资讯列表 -->
+  <view class='news acea-row row-between-wrapper' >
+    <view class='pictrue'><image src='/images/news.png'></image></view>
+    <view class='swiperTxt'>
+      <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="2500" duration="{{duration}}" vertical="true" circular="true">
+        <block wx:for="{{itemNew}}" wx:key>
+          <swiper-item catchtouchmove='catchTouchMove'>
+              <navigator open-type='navigate' url='{{item.url}}'  class='acea-row row-between-wrapper' hover-class='none'>
+                <view class='text acea-row row-between-wrapper'>
+                    <view class='label border2' wx:if="{{item.id%2 == 0}}">最新</view>
+                    <view class='newsTitle line1'>{{item.info}}</view>
+                </view>
+                <view class='iconfont icon-xiangyou'></view>
+              </navigator>
+            </swiper-item>
+          </block>
+        </swiper> 
+    </view>
+  </view>
+  <!-- 快速选择 -->
+  <view class='wrapper'>
+    <view class='title acea-row row-between-wrapper'>
+      <view class='text'>
+        <view class='name line1'>快速选择</view>
+        <view class='line1'>{{fastInfo}}</view>
+      </view>
+      <navigator class='more' url='/pages/goods_cate/goods_cate' open-type='switchTab'>更多<text class='iconfont icon-jiantou'></text></navigator>
+    </view>
+    <view class='scroll-product'>
+      <scroll-view class="scroll-view_x" scroll-x style="width:auto;overflow:hidden;">
+        <block wx:for="{{fastList}}" wx:key>
+          <navigator hover-class="none" class='item' url='/pages/goods_list/goods_list?sid={{item.id}}&title={{item.cate_name}}'>
+            <view class='img-box'>
+              <image src='{{item.pic}}'></image>
+            </view>
+            <view class='pro-info line1'>{{item.cate_name}}</view>
+          </navigator>
+        </block>  
+      </scroll-view>
+    </view>
+  </view>
+  <!-- 热门榜单 --> 
+  <view class='hotList'>
+    <view class='hot-bg'>
+      <view class='title acea-row row-between-wrapper'>
+        <view class='text line1'><text class='label'>热门榜单</text>根据销量、搜索、好评等综合得出</view>
+        <navigator class='more' hover-class="none" url='/pages/first-new-product/index?type=2'>更多<text class="iconfont icon-jiantou"></text></navigator>
+      </view>
+    </view>
+    <view class='list acea-row row-between-wrapper'>
+      <block wx:for="{{likeInfo}}" wx:key>
+        <navigator class='item' url='/pages/goods_details/index?id={{item.id}}'>
+          <view class='pictrue'>
+            <image src='{{item.image}}'></image>
+            <image wx:if="{{index == 0}}" src='/images/one.png' class='numPic'></image>
+            <image wx:elif="{{index == 1}}" src='/images/two.png' class='numPic'></image>
+            <image wx:elif="{{index == 2}}" src='/images/three.png' class='numPic'></image>
+          </view>
+          <view class='name line1'>{{item.store_name}}</view>
+          <view class='money font-color'>￥<text class='num'>{{item.price}}</text></view>
+        </navigator>
+      </block>  
+    </view>
+  </view>
+  <!-- 首发新品 -->
+  <view class='wrapper'>
+    <view class='title acea-row row-between-wrapper'>
+      <view class='text'>
+        <view class='name line1'>首发新品<text class='new font-color'>NEW~</text></view>
+        <view class='line1'>{{firstInfo}}</view>
+      </view>
+      <navigator class='more' hover-class="none" url='/pages/first-new-product/index?type=3'>更多<text class='iconfont icon-jiantou'></text></navigator>
+    </view>
+    <view class='newProducts'>
+      <scroll-view class="scroll-view_x" scroll-x style="width:auto;overflow:hidden;">
+        <block wx:for="{{firstList}}" wx:key>
+          <navigator hover-class="none" url='/pages/goods_details/index?id={{item.id}}' class='item'>
+            <view class='img-box'>
+              <image src='{{item.image}}'></image>
+            </view>
+            <view class='pro-info line1'>{{item.store_name}}</view>
+            <view class='money font-color'>￥{{item.price}}</view>
+          </navigator>
+        </block>  
+       </scroll-view>
+    </view>
+  </view>
+  <!-- 促销单品 -->
+  <view class='wrapper'>
+    <view class='title acea-row row-between-wrapper'>
+      <view class='text'>
+         <view class='name line1'>促销单品</view>
+         <view class='line1'>{{salesInfo}}</view>
+      </view>
+      <navigator class='more' hover-class="none" url='/pages/promotional-items/index'>更多<text class='iconfont icon-jiantou'></text></navigator>
+    </view>
+     <promotionGood benefit="{{benefit}}"></promotionGood>
+  </view>
+</view>

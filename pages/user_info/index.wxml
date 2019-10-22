@@ -1,0 +1,47 @@
+<navbar parameter='{{parameter}}'></navbar>
+<form bindsubmit="formSubmit">
+  <view class='personal-data'>
+    <view class='list'>
+      <view class='item acea-row row-between-wrapper'>
+        <view>头像</view>
+        <view class='pictrue' bindtap='uploadpic'><image src='{{userInfo.avatar}}'></image></view>
+      </view>
+      <view class='item acea-row row-between-wrapper'>
+        <view>真实姓名</view>
+        <view class='input'><input type='text' name='truename' placeholder="请输入真实姓名" value='{{userInfo.truename}}'></input></view>
+      </view>
+      <view class='item acea-row row-between-wrapper'>
+        <view>出生年月</view>
+        <view class='input'>
+          <picker mode="date" start="1905-09-01" bindchange="bindDateChange">
+            <input name="brithday" readonly value='{{userInfo.brithday}}' class="edit-input"/>
+          </picker>
+        </view>
+      </view>
+      <view class='item acea-row row-between-wrapper'>
+        <view>血型</view>
+        <view class='input'>
+          <picker mode="selector" range="{{bloodArray}}" value="bloodIndex" bindchange="bindBloodChange">
+            <input name="blood" readonly value='{{userInfo.blood}}' class="edit-input"/>
+          </picker>
+        </view>
+      </view>
+      <view class='item acea-row row-between-wrapper'>
+        <view>所在城市</view>
+        <view class='input'>
+          <picker mode="region" bindchange="bindRegionChange" value="{{userInfo.city}}" custom-item="{{customItem}}">
+            <input name="city" readonly value='{{userInfo.city}}' class="edit-input"/>
+          </picker>
+        </view>
+      </view>
+      <view class='item acea-row row-between-wrapper'>
+        <view>ID号</view>
+        <view class='input acea-row row-between-wrapper'>
+          <input type='text' value='{{userInfo.uid}}' disabled='true' class='id'></input>
+          <text class='iconfont icon-suozi'></text>
+        </view> 
+      </view>
+    </view>
+    <button class='modifyBnt bg-color' formType="submit">保存修改</button>
+  </view>
+</form>

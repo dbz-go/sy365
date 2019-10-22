@@ -1,0 +1,74 @@
+<!--pages/loginAndRegister/index.wxml-->
+<navbar parameter='{{parameter}}'></navbar>
+<view class="login">
+  <view class="logo">
+    <image class="logoimg" src="../../images/logo1.jpg"></image>
+  </view>
+ 
+  <view class="form">
+    <!-- 注册 -->
+    <form wx:if="{{label == 0}}" bindsubmit="registerAction">
+      <view class="form-item">
+        <input type="number" class="input-item" maxlength="11" bindblur="phoneInput" name="phoneNum" value="{{phoneNum}}" placeholder="请输入中国大陆手机号"  />
+      </view>
+      <view class="form-item">
+        <input class="input-item verify-code" name="verifyCode" value="{{verifyCode}}" maxlength="6" placeholder="请输入短信验证码" type="number" />
+        <view class="verify-code-tips {{sendVerifyCode ? 'verify-code-tips-active' : ''}}" catchtap="resend">{{codeTitle}}{{countDownTime > 0 ? '(' + countDownTime + 's)' : ''}}</view>
+      </view>
+      <view class="form-item">
+        <input type="password" name="password" value="{{password}}" class="input-item" placeholder="请输入密码"/>
+      </view>
+      <view class="acea-row row-between forget-pwd">
+        <view bindtap="changeLabel" class="ta-l" data-label="3">激活卡注册</view>
+        <view class="ta-r" bindtap="changeLabel" data-label="1">去登录</view>
+      </view> 
+      <button class='btn bg-color' formType="submit">注册</button>
+    </form>
+    <!-- 登录 -->
+    <form wx:if="{{label == 1}}" bindsubmit="loginAction">
+      <view class="form-item">
+        <input type="number" class="input-item" name="phoneNum" maxlength="11" value="{{phoneNum}}" placeholder="请输入中国大陆手机号"  />
+      </view>
+      <view class="form-item">
+        <input type="password" value="{{password}}" name="password" class="input-item" placeholder="请输入密码"/>
+      </view>
+      <view class="acea-row row-between forget-pwd">
+        <view bindtap="changeLabel" class="ta-l" data-label="0">去注册</view>
+        <view class="ta-r" bindtap="changeLabel" data-label="2">忘记密码</view>
+      </view> 
+      <button class='btn bg-color' formType="submit">登录</button>
+    </form>
+    <!-- 忘记密码 -->
+    <form  wx:if="{{label == 2}}" bindsubmit="forgetAction">
+      <view class="form-item">
+        <input type="number" class="input-item" bindblur="phoneInput" name="phoneNum" maxlength="11" value="{{phoneNum}}" placeholder="请输入注册的手机号"  />
+      </view>
+      <view class="form-item">
+        <input class="input-item verify-code" name="verifyCode" value="{{verifyCode}}" maxlength="6" placeholder="请输入短信验证码" type="number" />
+        <view class="verify-code-tips {{sendVerifyCode ? 'verify-code-tips-active' : ''}}" catchtap="resend">{{codeTitle}}{{countDownTime > 0 ? '(' + countDownTime + 's)' : ''}}</view>
+      </view>
+      <view class="form-item">
+        <input type="password" name="password" value="{{password}}" class="input-item" placeholder="请输入新密码"/>
+      </view>
+      <view class="forget-pwd ta-r" bindtap="changeLabel" data-label="1">去登录</view>
+      <button class='btn bg-color' formType="submit">设置密码</button>
+    </form>
+    <!-- 激活卡 -->
+    <form wx:if="{{label == 3}}" bindsubmit="cardRegisterAction">
+      <view class="form-item">
+        <input type="text" class="input-item" name="card" value="{{card}}" placeholder="请输入激活卡卡号"  />
+      </view>
+      <view class="form-item">
+        <input type="text" class="input-item" name="cardPwd" value="{{cardPwd}}" placeholder="请输入对应卡密"  />
+      </view>
+      <view class="form-item"> 
+        <input type="text" class="input-item" name="phoneNum" value="{{phoneNum}}" placeholder="请输入对应手机号"  />
+      </view>
+      <view class="acea-row row-between forget-pwd">
+        <view bindtap="changeLabel" class="ta-l" data-label="0">手机号注册</view>
+        <view class="ta-r" bindtap="changeLabel" data-label="1">去登录</view>
+      </view> 
+      <button class='btn bg-color' formType="submit">激活并注册</button>
+    </form>
+  </view>
+</view>
